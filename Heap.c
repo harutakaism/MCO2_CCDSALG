@@ -16,11 +16,11 @@ struct Heap
 
 int Parent(int Index)
 {
-    return(Index - 1)/2;
+    return Index/2;
 }
 int LeftChild(int Index)
 {
-    return (Index*2)+1;
+    return Index*2+1;
 }
 int RightChild(int Index)
 {
@@ -33,11 +33,17 @@ void Swap(int *A, int *B)
     *A = *B;
     *B = temp;
 }
-/* Let n = index of a specific element
- * Parent of n = (n - 1) / 2
- * Left Child of n = (n*2) + 1
- * Right Child of n = (n*2) + 2
- */
+
+
+
+
+
+
+
+
+
+
+
 void HeapUp(struct Heap *pHeap, int nIndexNumber)
 {
     int nParent;
@@ -101,7 +107,7 @@ int HeapMaximum(struct Heap pHeap)
     if(pHeap.nCursize < 1)
     {
         printf("for example nothing: ない");
-        return -1;
+        return -999;
     }
     return pHeap.pHeapArray[0];
 }
@@ -114,4 +120,17 @@ int HeapExtractMax(struct Heap dHeap)
     dHeap.nCursize -= 1;
     MaxHeapify(&dHeap,0);
     return maxHiroki;
+}
+
+void HeapInsert(struct Heap *pHeap, int Index, int Numbero)
+{
+    if(Index >= pHeap->nCursize)
+    {
+        pHeap->pHeapArray[Index] = Numbero;
+    }
+    else
+    {
+        pHeap->pHeapArray[pHeap->nCursize] = Numbero;
+    }
+        pHeap->nCursize++;
 }
