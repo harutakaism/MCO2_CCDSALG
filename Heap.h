@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "Heap.c"
 
 //Heap Library
 struct Heap
