@@ -1,9 +1,6 @@
 //The following libraries are the only one allowed
 //利用がされたライブラリーのみ
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
+#include "Heap.h"
 
 
 //Heap Library
