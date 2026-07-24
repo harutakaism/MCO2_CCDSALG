@@ -18,14 +18,17 @@ int Parent(int Index)
 {
     return Index/2;
 }
+
 int LeftChild(int Index)
 {
     return Index*2+1;
 }
+
 int RightChild(int Index)
 {
     return (Index*2)+2;
 }
+
 void Swap(int *A, int *B)
 {
     int temp;
@@ -33,16 +36,6 @@ void Swap(int *A, int *B)
     *A = *B;
     *B = temp;
 }
-
-
-
-
-
-
-
-
-
-
 
 void HeapUp(struct Heap *pHeap, int nIndexNumber)
 {
@@ -80,8 +73,8 @@ void MaxHeapify(struct  Heap *pHeap, int IndexAt)
      Swap(&pHeap->pHeapArray[HoogsteVanDijk], &pHeap->pHeapArray[IndexAt]);
      MaxHeapify(pHeap,HoogsteVanDijk);
  }
-
 }
+
 void BuildMaxHeap(struct Heap *pHeap, int NumeroNoIndex)
 {
     int i;
@@ -91,6 +84,7 @@ void BuildMaxHeap(struct Heap *pHeap, int NumeroNoIndex)
         MaxHeapify(pHeap, i);
     }
 }
+
 void HeapSort(struct Heap *pHeap, int Ueda)
 {
     int i;
@@ -102,6 +96,7 @@ void HeapSort(struct Heap *pHeap, int Ueda)
         MaxHeapify(pHeap,0);
     }
 }
+
 int HeapMaximum(struct Heap pHeap)
 {
     if(pHeap.nCursize < 1)
