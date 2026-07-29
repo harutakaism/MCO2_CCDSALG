@@ -13,7 +13,7 @@ struct Heap
 
 int Parent(int Index)
 {
-    return Index/2;
+    return (Index-1)/2;
 }
 
 int LeftChild(int Index)
@@ -45,6 +45,10 @@ void HeapUp(struct Heap *pHeap, int nIndexNumber)
             Swap(&pHeap->pHeapArray[nIndexNumber],&pHeap->pHeapArray[nParent]);
             nIndexNumber = nParent;
         }
+        else
+        {
+            break;
+        }
     }
 }
 
@@ -53,7 +57,7 @@ void MaxHeapify(struct  Heap *pHeap, int IndexAt)
  int Le, Ri, HoogsteVanDijk; //HoogsteVanDijk is Highest Number
  Le = LeftChild(IndexAt); //Left Child
  Ri = RightChild(IndexAt); //Right Child
- if(Le <= pHeap->nCursize && pHeap->pHeapArray[Le] > pHeap->pHeapArray[Ri])
+ if(Le <= pHeap->nCursize && pHeap->pHeapArray[Le] > pHeap->pHeapArray[IndexAt])
  {
      HoogsteVanDijk = Le;
  }
@@ -76,7 +80,7 @@ void BuildMaxHeap(struct Heap *pHeap, int NumeroNoIndex)
 {
     int i;
     pHeap->nCursize = NumeroNoIndex;
-    for(i = NumeroNoIndex/2; i > 1; i++)
+    for(i = (NumeroNoIndex-1)/2; i >= 0; i--)
     {
         MaxHeapify(pHeap, i);
     }
@@ -86,7 +90,7 @@ void HeapSort(struct Heap *pHeap, int Ueda)
 {
     int i;
     BuildMaxHeap(pHeap, Ueda);
-    for(i = Ueda; i > 2; i--)
+    for(i = Ueda; i >= 1; i--)
     {
         Swap(&pHeap->pHeapArray[0],&pHeap->pHeapArray[i]);
         pHeap->nCursize -= 1;
@@ -96,7 +100,7 @@ void HeapSort(struct Heap *pHeap, int Ueda)
 
 int HeapMaximum(struct Heap pHeap)
 {
-    if(pHeap.nCursize < 1)
+    if(pHeap.nCursize < 0)
     {
         printf("for example nothing: ない");
         return -999;
@@ -104,25 +108,19 @@ int HeapMaximum(struct Heap pHeap)
     return pHeap.pHeapArray[0];
 }
 
-int HeapExtractMax(struct Heap dHeap)
+int HeapExtractMax(struct Heap *dHeap)
 {
     int maxHiroki;
-    maxHiroki = HeapMaximum(dHeap);
-    dHeap.pHeapArray[0] = dHeap.pHeapArray[dHeap.nCursize];
-    dHeap.nCursize -= 1;
-    MaxHeapify(&dHeap,0);
+    maxHiroki = HeapMaximum(*dHeap);
+    dHeap->pHeapArray[0] = dHeap->pHeapArray[dHeap->nCursize];
+    dHeap->nCursize -= 1;
+    MaxHeapify(dHeap,0);
     return maxHiroki;
 }
 
 void HeapInsert(struct Heap *pHeap, int Index, int Numbero)
 {
-    if(Index >= pHeap->nCursize)
-    {
-        pHeap->pHeapArray[Index] = Numbero;
-    }
-    else
-    {
-        pHeap->pHeapArray[pHeap->nCursize] = Numbero;
-    }
-        pHeap->nCursize++;
+    pHeap->nCursize++;
+    pHeap->pHeapArray[pHeap->nCursize] = Numbero;
+    HeapUp(pHeap, pHeap->nCursize);
 }
