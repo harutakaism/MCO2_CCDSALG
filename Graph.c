@@ -4,6 +4,9 @@
 GraphTag *createGraph()
 {
     GraphTag *graph = (GraphTag*)malloc(sizeof(GraphTag));
+    if (graph == NULL){
+        return NULL;
+    }
     graph->firstVertex = NULL;
     graph->numVertices = 0;
     
@@ -13,6 +16,10 @@ GraphTag *createGraph()
 VertexNodeTag* findVertex(GraphTag* graph, char *name)
 {
     VertexNodeTag *currVertex = graph->firstVertex;
+
+    if (graph == NULL){
+        return NULL;
+    }
     
     while (currVertex != NULL)
     {
@@ -25,6 +32,31 @@ VertexNodeTag* findVertex(GraphTag* graph, char *name)
 
     return NULL;
 }
+
+EdgeNodeTag *findEdge(VertexNodeTag *vertex, char *dest)
+{
+    EdgeNodeTag *currEdge;
+
+    if (vertex == NULL)
+    {
+        return NULL;
+    }
+
+    currEdge = vertex->firstEdge;
+
+    while (currEdge != NULL)
+    {
+        if (strcmp(currEdge->dest, dest) == 0)
+        {
+            return currEdge;
+        }
+
+        currEdge = currEdge->nextEdge;
+    }
+
+    return NULL;
+}
+
 
 void insertSingleEdge(VertexNodeTag *vertex, EdgeNodeTag *edge)
 {
