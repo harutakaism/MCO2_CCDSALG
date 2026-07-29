@@ -22,5 +22,7 @@ typedef struct Graph {
 
 
 GraphTag *createGraph();
+VertexNodeTag* findVertex(GraphTag* graph, char *name);
+void insertSingleEdge(VertexNodeTag *vertex, EdgeNodeTag *edge);
 void addVertex(GraphTag *graph, char *vertex);
 void addEdge(GraphTag *graph, char *vertex1, char *vertex2, int weight);
