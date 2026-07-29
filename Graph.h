@@ -4,13 +4,13 @@
 
 
 typedef struct EdgeNode {
-    char dest[256];
+    char dest[257];
     int weight;
-    EdgeNodeTag *nextEdge;
+    struct EdgeNode *nextEdge;
 } EdgeNodeTag;
 
 typedef struct VertexNode {
-    char vertexName[256];
+    char vertexName[257];
     EdgeNodeTag *firstEdge;
     struct VertexNode *nextVertex;
 } VertexNodeTag;
