@@ -26,3 +26,6 @@ VertexNodeTag* findVertex(GraphTag* graph, char *name);
 void insertSingleEdge(VertexNodeTag *vertex, EdgeNodeTag *edge);
 void addVertex(GraphTag *graph, char *vertex);
 void addEdge(GraphTag *graph, char *vertex1, char *vertex2, int weight);
+int getDegree(GraphTag *graph, char *vertex);
+int edgeCheck(GraphTag *graph, char *vertex1, char *vertex2);
+void printGraph(GraphTag *graph, char *name);
