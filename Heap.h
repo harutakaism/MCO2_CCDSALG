@@ -17,7 +17,7 @@ int LeftChild(int Index);
 int RightChild(int Index);
 void Swap(int *A, int *B);
 void HeapUp(struct Heap *pHeap, int nIndexNumber);
-void MaxHeapify(struct  Heap *pHeap, int IndexAt
+void MaxHeapify(struct  Heap *pHeap, int IndexAt);
 void BuildMaxHeap(struct Heap *pHeap, int NumeroNoIndex);
 void HeapSort(struct Heap *pHeap, int Ueda);
 int HeapMaximum(struct Heap pHeap);

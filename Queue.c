@@ -37,12 +37,7 @@ void Enqueue(struct Queue *Q, char x[])
         strcpy(Q->QueueMember[Q->tail], x);
         Q->tail++;
     }
-    else
-    {
-        printf("Element not added: Queue Overflow\n");
-        printf("要素を追加できませんでした：キューオーバフロー\n");
-        //NOTE: Can remove the else statements if unnecessary
-    }
+    
 }
 
 void Dequeue(struct Queue *Q)
@@ -51,20 +46,24 @@ void Dequeue(struct Queue *Q)
     {
         Q->head++;
     }
-    else
-    {
-        printf("Element not removed: Queue Underflow\n");
-        printf("要素を追加できませんでした：キューアンダーフロー\n");
-        //NOTE: Can remove the else statements if unnecessary
-    }
+    
 }
 
 char *QueueHead(struct Queue *Q)
 {
+    if (QueueEmpty(Q))
+    {
+        return NULL;
+    }
+
     return Q->QueueMember[Q->head];
 }
 
 char *QueueTail(struct Queue *Q)
 {
+     if (QueueEmpty(Q))
+    {
+        return NULL;
+    }
     return Q->QueueMember[Q->tail - 1];
 }

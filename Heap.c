@@ -13,7 +13,7 @@ struct Heap
 
 int Parent(int Index)
 {
-    return Index/2;
+    return (Index - 1) /2;
 }
 
 int LeftChild(int Index)
