@@ -99,3 +99,47 @@ void breadthFirstSearch(GraphTag *graph, char *startName)
         }
     }
 }
+
+int pathCheck(GraphTag *graph, char *startName, char *endName)
+{
+    struct Queue queue;
+    char visited[256][257];
+    int visitedCount = 0;
+
+    if (findVertex(graph, startName) == NULL || findVertex(graph, endName) == NULL){
+
+        return 0;
+    }
+
+    CreateQ(&queue);
+
+    Enqueue(&queue, startName);
+
+    strcpy(visited[visitedCount], startName);
+    visitedCount++;
+
+    while (!QueueEmpty(&queue))
+    {
+        VertexNodeTag *currVertex = findVertex(graph, QueueHead(&queue));
+        EdgeNodeTag *currEdge = currVertex->firstEdge;
+
+        Dequeue(&queue);
+
+        if (strcmp(currVertex->vertexName, endName) == 0) return 1;
+
+        while(currEdge != NULL)
+        {
+            if (!isVisited(visited, visitedCount, currEdge->dest))
+            {
+                Enqueue(&queue, currEdge->dest);
+
+                strcpy(visited[visitedCount], currEdge->dest);
+                visitedCount++;
+            }
+
+            currEdge = currEdge->nextEdge;
+        }
+    }
+
+    return 0;
+}
