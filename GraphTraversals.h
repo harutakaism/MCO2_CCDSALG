@@ -5,3 +5,4 @@
 
 void depthFirstSearch(GraphTag *graph, char *startName);
 void breadthFirstSearch(GraphTag *graph, char *startName);
+int pathCheck(GraphTag *graph, char *startName, char *endName);
