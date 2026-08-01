@@ -3,7 +3,11 @@
 
 int main()
 {
-    int input = 0;
+    char input[258];
+    char num[2];
+    char cInput;
+    int indexer, nChars, i;
+    int boolspace = 0;
 
     do
     {
@@ -19,32 +23,78 @@ int main()
         printf("[10 - Print Graph] Format: 10\n");
         printf("[11 - End Program] Format: 11\n");
         printf("----------------------------------------------------\n");
-        printf("Enter number here: ");
-        do
-        {
-            scanf("%d", &input);
-            if(input < 1 || input > 11)
-            {
-                printf("Error! Please enter values from 1-11!");
-            }
-        }
-        while (input < 1 || input > 11);
 
-        switch (input)
+        //StringBuilder start
+        indexer = 0;
+        printf("Enter number and format here: ");
+        scanf(" %c", &cInput);
+        input[nChars++] = cInput;
+
+        while(nChars < 257 && scanf("%c", &cInput) == 1 && cInput != '\n')
         {
-            case 1: break;
-            case 2: break;
-            case 3: break;
-            case 4: break;
-            case 5: break;
-            case 6: break;
-            case 7: break;
-            case 8: break;
-            case 9: break;
-            case 10: break;
-            case 11: break;
+            input[nChars++] = cInput;
+        }
+
+        input[nChars] = '\0';
+        nChars = 0; //Reset nChars to make way for next one
+        //StringBuilder ends
+        strcpy(num,"");
+        //To get the number
+        for(i = 0; input[i] != ' ' && i < 2; i++)
+        {
+            num[i] = input[i];
+        }
+
+        if(strcmp(num,"1") == 0)
+        {
+            //Add Vertex
+        }
+        if(strcmp(num,"2") == 0)
+        {
+            //Add Edge
+        }
+        if(strcmp(num,"3") == 0)
+        {
+            //Get Degree
+        }
+        if(strcmp(num,"4") == 0)
+        {
+            //Edge-Check
+        }
+        if(strcmp(num,"5") == 0)
+        {
+            //BFS
+        }
+        if(strcmp(num,"6") == 0)
+        {
+            //DFS
+        }
+        if(strcmp(num,"7") == 0)
+        {
+            //Path-Check
+        }
+        if(strcmp(num,"8") == 0)
+        {
+            //MST
+        }
+        if(strcmp(num,"9") == 0)
+        {
+            //Shortest Path
+        }
+        if(strcmp(num,"10") == 0)
+        {
+            //Print Graph
+        }
+        if(strcmp(num,"11") == 0)
+        {
+            //Terminate Program
+            printf("Program exited.");
+        }
+        else
+        {
+            printf("Error: Please enter the numbers from 1-11 and their respective format!\n");
         }
     }
-    while(input != 11);
+    while(strcmp(input,"11") != 0);
     return 0;
 }
