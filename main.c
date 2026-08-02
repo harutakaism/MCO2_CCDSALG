@@ -1,100 +1,107 @@
 #include <stdio.h>
-#include <string.h>
+#include "Graph.h"
+#include "GraphTraversals.h"
+#include "MST.h"
 
 int main()
 {
-    char input[258];
-    char num[2];
-    char cInput;
-    int indexer, nChars, i;
-    int boolspace = 0;
+    GraphTag *graph = createGraph();
+    int command;
+    char name1[257];
+    char name2[257];
+    int weight;
 
-    do
+    if(graph == NULL)
     {
-        printf("[1 - Add Vertex] Format: 1 <Name>\n");
-        printf("[2 - Add Edge] Format: 2 <Name1> <Name2> <Weight>\n");
-        printf("[3 - Get Degree] Format: 3 <Name>\n");
-        printf("[4 - Edge Check] Format: 4 <Name1> <Name2>\n");
-        printf("[5 - BFS] Format: 5 <Name>\n");
-        printf("[6 - DFS] Format: 6 <Name>\n");
-        printf("[7 - Path Check] Format: 7 <Name1> <Name2>\n");
-        printf("[8 - MST] Format: 8\n");
-        printf("[9 - Shortest Path] Format: 9 <Name1> <Name2>\n");
-        printf("[10 - Print Graph] Format: 10\n");
-        printf("[11 - End Program] Format: 11\n");
-        printf("----------------------------------------------------\n");
+        return 1;
+    }
 
-        //StringBuilder start
-        indexer = 0;
-        printf("Enter number and format here: ");
-        scanf(" %c", &cInput);
-        input[nChars++] = cInput;
-
-        while(nChars < 257 && scanf("%c", &cInput) == 1 && cInput != '\n')
+    while(1)
+    {
+        if(scanf("%d", &command) != 1)
         {
-            input[nChars++] = cInput;
+            break;
         }
 
-        input[nChars] = '\0';
-        nChars = 0; //Reset nChars to make way for next one
-        //StringBuilder ends
-        strcpy(num,"");
-        //To get the number
-        for(i = 0; input[i] != ' ' && i < 2; i++)
+        if(command == 1)
         {
-            num[i] = input[i];
+            if(scanf("%256s", name1) == 1)
+            {
+                addVertex(graph, name1);
+            }
         }
+        else if(command == 2)
+        {
+            if(scanf("%256s %256s %d", name1, name2, &weight) == 3)
+            {
+                if(weight >= 1 && weight <= 100)
+                {
+                    addEdge(graph, name1, name2, weight);
+                }
+            }
+        }
+        else if(command == 3)
+        {
+            if(scanf("%256s", name1) == 1)
+            {
+                printf("%d\n", getDegree(graph, name1));
+            }
+        }
+        else if(command == 4)
+        {
+            if(scanf("%256s %256s", name1, name2) == 2)
+            {
+                printf("%d\n", edgeCheck(graph, name1, name2));
+            }
+        }
+        else if(command == 5)
+        {
+            if(scanf("%256s", name1) == 1)
+            {
+                breadthFirstSearch(graph, name1);
+            }
+        }
+        else if(command == 6)
+        {
+            if(scanf("%256s", name1) == 1)
+            {
+                depthFirstSearch(graph, name1);
+            }
+        }
+        else if(command == 7)
+        {
+            if(scanf("%256s %256s", name1, name2) == 2)
+            {
+                printf("%d\n", pathCheck(graph, name1, name2));
+            }
+        }
+        else if(command == 8)
+        {
+            GraphTag *mst = minimumSpanningTree(graph);
 
-        if(strcmp(num,"1") == 0)
-        {
-            //Add Vertex
+            if(mst != NULL)
+            {
+                printGraph(mst, "MST");
+                destroyGraph(mst);
+            }
         }
-        if(strcmp(num,"2") == 0)
+        // else if(command == 9)
+        // {
+        //     if(scanf("%256s %256s", name1, name2) == 2)
+        //     {
+        //         shortestPath(graph, name1, name2);
+        //     }
+        // }
+        else if(command == 10)
         {
-            //Add Edge
+            printGraph(graph, "G");
         }
-        if(strcmp(num,"3") == 0)
+        else if(command == 11)
         {
-            //Get Degree
-        }
-        if(strcmp(num,"4") == 0)
-        {
-            //Edge-Check
-        }
-        if(strcmp(num,"5") == 0)
-        {
-            //BFS
-        }
-        if(strcmp(num,"6") == 0)
-        {
-            //DFS
-        }
-        if(strcmp(num,"7") == 0)
-        {
-            //Path-Check
-        }
-        if(strcmp(num,"8") == 0)
-        {
-            //MST
-        }
-        if(strcmp(num,"9") == 0)
-        {
-            //Shortest Path
-        }
-        if(strcmp(num,"10") == 0)
-        {
-            //Print Graph
-        }
-        if(strcmp(num,"11") == 0)
-        {
-            //Terminate Program
-            printf("Program exited.");
-        }
-        else
-        {
-            printf("Error: Please enter the numbers from 1-11 and their respective format!\n");
+            break;
         }
     }
-    while(strcmp(input,"11") != 0);
+
+    destroyGraph(graph);
     return 0;
 }

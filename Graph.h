@@ -1,3 +1,6 @@
+#ifndef GRAPH_H
+#define GRAPH_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -29,3 +32,6 @@ void addEdge(GraphTag *graph, char *vertex1, char *vertex2, int weight);
 int getDegree(GraphTag *graph, char *vertex);
 int edgeCheck(GraphTag *graph, char *vertex1, char *vertex2);
 void printGraph(GraphTag *graph, char *name);
+void destroyGraph(GraphTag *graph);
+
+#endif

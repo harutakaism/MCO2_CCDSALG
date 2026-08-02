@@ -243,4 +243,34 @@ void printGraph(GraphTag *graph, char *name)
     printf("}\n");
 }
 
+void destroyGraph(GraphTag *graph)
+{
+    VertexNodeTag *currVertex;
+
+    if (graph == NULL)
+    {
+        return;
+    }
+
+    currVertex = graph->firstVertex;
+
+    while (currVertex != NULL)
+    {
+        VertexNodeTag *nextVertex = currVertex->nextVertex;
+        EdgeNodeTag *currEdge = currVertex->firstEdge;
+
+        while (currEdge != NULL)
+        {
+            EdgeNodeTag *nextEdge = currEdge->nextEdge;
+            free(currEdge);
+            currEdge = nextEdge;
+        }
+
+        free(currVertex);
+        currVertex = nextVertex;
+    }
+
+    free(graph);
+}
+
 
